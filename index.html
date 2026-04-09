@@ -3,514 +3,816 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mohd Azhar Shaikh — Software Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<title>Azhar Shaikh — DevOps & Cloud Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
-/* ===== RESET & VARIABLES ===== */
-:root {
-  --bg:      #080810;
-  --bg2:     #0e0e1a;
-  --bg3:     #141428;
-  --surface: #1a1a30;
-  --border:  rgba(255,255,255,0.08);
-  --accent:  #4f8ef7;
-  --accent2: #7c3aed;
-  --accent3: #06d6c7;
-  --text:    #eeeef8;
-  --muted:   #7a7a9a;
-  --green:   #22d3a3;
-  --r:       16px;
-  --ease:    0.35s cubic-bezier(0.4,0,0.2,1);
-  --font-h:  'Syne', sans-serif;
-  --font-b:  'DM Sans', sans-serif;
-}
+/* ─── CUSTOM CURSOR ─── */
+*{cursor:none!important}
+#cur{position:fixed;width:10px;height:10px;background:#e8ff47;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s ease,width .2s ease,height .2s ease;mix-blend-mode:difference}
+#cur.big{width:48px;height:48px}
+
+/* ─── RESET ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-b);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:3px}
-a{text-decoration:none}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Geist Mono',monospace;
+  background:#0d0d0d;
+  color:#f0ebe0;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:#e8ff47}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
 
-/* ===== NAVBAR ===== */
-#navbar{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:16px 6%;
+/* ─── VARIABLES ─── */
+:root{
+  --lime:#e8ff47;
+  --ink:#0d0d0d;
+  --paper:#f0ebe0;
+  --rust:#c8472a;
+  --dim:#2a2a2a;
+  --muted:#5a5a5a;
+  --border:#2a2a2a;
+}
+
+/* ─── NOISE GRAIN ─── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:8000;opacity:1;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:700;
+  padding:0 48px;
+  height:56px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(8,8,16,0.75);
-  backdrop-filter:blur(24px);
   border-bottom:1px solid var(--border);
-  transition:box-shadow var(--ease);
+  background:rgba(13,13,13,.92);
+  backdrop-filter:blur(12px);
 }
-#navbar.scrolled{box-shadow:0 8px 48px rgba(0,0,0,0.5)}
-.nav-logo{
-  font-family:var(--font-h);font-size:1.35rem;font-weight:800;letter-spacing:-0.5px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+.nav-wordmark{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;letter-spacing:3px;
+  color:var(--lime);
 }
-.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
-.nav-links a{
-  font-size:.83rem;font-weight:500;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.8px;
-  position:relative;transition:color var(--ease);
+.nav-menu{display:flex;gap:32px;list-style:none}
+.nav-menu a{
+  font-family:'Geist Mono',monospace;
+  font-size:.72rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);
+  transition:color .2s;
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;
-  width:0;height:1.5px;background:var(--accent);
-  transition:width var(--ease);
+.nav-menu a:hover{color:var(--paper)}
+.nav-hire{
+  font-family:'Geist Mono',monospace;
+  font-size:.72rem;letter-spacing:2px;text-transform:uppercase;
+  padding:8px 20px;
+  border:1px solid var(--lime);
+  color:var(--lime);
+  transition:background .2s,color .2s;
 }
-.nav-links a:hover{color:var(--text)}
-.nav-links a:hover::after{width:100%}
-.nav-cta{
-  background:linear-gradient(135deg,var(--accent),var(--accent2)) !important;
-  color:#fff !important;padding:8px 20px !important;border-radius:50px;
-  font-weight:600 !important;
-}
-.nav-cta::after{display:none !important}
-.nav-cta:hover{opacity:.88;color:#fff !important}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:var(--ease)}
+.nav-hire:hover{background:var(--lime);color:var(--ink)}
+.ham-btn{display:none;flex-direction:column;gap:4px;background:none;border:none;padding:4px}
+.ham-btn span{display:block;width:20px;height:1px;background:var(--paper)}
 
-/* ===== HERO ===== */
+/* ─── HERO ─── */
 #hero{
-  min-height:100vh;display:flex;align-items:center;
-  padding:130px 6% 90px;position:relative;overflow:hidden;
+  min-height:100vh;
+  padding:100px 48px 60px;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  position:relative;
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
 }
-.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.16;animation:orb-float 9s ease-in-out infinite}
-.orb1{width:520px;height:520px;background:var(--accent2);top:-120px;right:-80px;animation-delay:0s}
-.orb2{width:380px;height:380px;background:var(--accent);bottom:-60px;left:8%;animation-delay:-3.5s}
-.orb3{width:260px;height:260px;background:var(--accent3);top:45%;right:28%;animation-delay:-7s}
-@keyframes orb-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.06)}}
 
-.hero-inner{max-width:820px;position:relative;z-index:1}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:9px;
-  background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.25);
-  color:var(--accent);padding:6px 18px;border-radius:50px;
-  font-size:.78rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
-  margin-bottom:30px;
+/* big rotating ring */
+.hero-ring{
+  position:absolute;
+  right:-180px;top:50%;transform:translateY(-50%);
+  width:560px;height:560px;
+  border-radius:50%;
+  border:1px solid rgba(232,255,71,.12);
+  animation:spin 28s linear infinite;
+  pointer-events:none;
 }
-.badge-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink-dot 2s infinite}
-@keyframes blink-dot{0%,100%{box-shadow:0 0 0 0 rgba(34,211,163,.6)}50%{box-shadow:0 0 0 7px rgba(34,211,163,0)}}
+.hero-ring::before{
+  content:'';position:absolute;inset:40px;border-radius:50%;
+  border:1px solid rgba(232,255,71,.07);
+}
+.hero-ring::after{
+  content:'';position:absolute;inset:80px;border-radius:50%;
+  border:1px solid rgba(232,255,71,.04);
+}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
 
-.hero-name{
-  font-family:var(--font-h);
-  font-size:clamp(3.2rem,9vw,7rem);
-  font-weight:800;line-height:1;letter-spacing:-3px;margin-bottom:10px;
+/* dot grid */
+.dot-grid{
+  position:absolute;left:0;top:0;
+  width:100%;height:100%;
+  background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
 }
-.hero-name .grad{
-  background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-.hero-role{
-  font-family:var(--font-h);font-size:clamp(1rem,2.8vw,1.55rem);
-  font-weight:600;color:var(--muted);min-height:44px;margin-bottom:22px;
-}
-.cursor{color:var(--accent);animation:cur 1s step-start infinite}
-@keyframes cur{0%,100%{opacity:1}50%{opacity:0}}
 
+.hero-eyebrow{
+  font-size:.72rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted);
+  display:flex;align-items:center;gap:12px;
+  position:relative;z-index:1;
+}
+.hero-eyebrow span{display:inline-block;width:32px;height:1px;background:var(--muted)}
+
+.hero-name-block{
+  position:relative;z-index:1;
+  align-self:center;
+}
+.hero-big{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,14vw,13rem);
+  line-height:.88;
+  letter-spacing:-1px;
+  color:var(--paper);
+}
+.hero-big .lime{color:var(--lime)}
+.hero-big .italic-serif{
+  font-family:'Instrument Serif',serif;
+  font-style:italic;
+  font-size:clamp(3rem,8vw,7.5rem);
+  color:var(--paper);
+  opacity:.65;
+}
+
+/* hand-drawn squiggle under name */
+.squiggle{
+  width:clamp(180px,35vw,420px);
+  height:14px;
+  margin-top:4px;
+  fill:none;
+  stroke:var(--lime);
+  stroke-width:2.5;
+  stroke-linecap:round;
+}
+
+.hero-sub{
+  position:relative;z-index:1;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:32px;
+  padding-top:32px;
+  border-top:1px solid var(--border);
+  margin-top:32px;
+}
 .hero-desc{
-  font-size:1.03rem;color:var(--muted);max-width:560px;
-  margin-bottom:42px;line-height:1.85;font-weight:300;
+  font-size:.88rem;color:var(--muted);
+  max-width:380px;line-height:1.9;
+  font-family:'Geist Mono',monospace;
 }
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-solid{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;
+  background:var(--lime);color:var(--ink);
+  font-family:'Geist Mono',monospace;
+  font-size:.78rem;letter-spacing:2px;text-transform:uppercase;font-weight:500;
+  transition:opacity .2s,transform .2s;
+}
+.btn-solid:hover{opacity:.85;transform:translate(-2px,-2px)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 24px;
+  border:1px solid var(--border);color:var(--muted);
+  font-family:'Geist Mono',monospace;
+  font-size:.78rem;letter-spacing:2px;text-transform:uppercase;
+  transition:border-color .2s,color .2s,transform .2s;
+}
+.btn-ghost:hover{border-color:var(--paper);color:var(--paper);transform:translate(-2px,-2px)}
 
-.btn-p{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:14px 28px;border-radius:50px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#fff;font-weight:600;font-size:.93rem;
-  box-shadow:0 0 32px rgba(79,142,247,.35);
-  transition:transform var(--ease),box-shadow var(--ease);
-}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 48px rgba(79,142,247,.45)}
-.btn-o{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:13px 26px;border-radius:50px;
-  border:1px solid var(--border);color:var(--text);
-  background:rgba(255,255,255,.025);
-  font-weight:500;font-size:.93rem;
-  backdrop-filter:blur(10px);
-  transition:border-color var(--ease),background var(--ease),transform var(--ease);
-}
-.btn-o:hover{border-color:var(--accent);background:rgba(79,142,247,.08);transform:translateY(-2px)}
-
+/* hero stats bar */
 .hero-stats{
-  display:flex;gap:48px;flex-wrap:wrap;
-  padding-top:40px;border-top:1px solid var(--border);
+  display:flex;flex-wrap:wrap;gap:0;
+  border-top:1px solid var(--border);
+  border-left:1px solid var(--border);
+  margin-top:48px;
 }
-.stat-n{
-  font-family:var(--font-h);font-size:2.1rem;font-weight:800;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+.hs{
+  flex:1;min-width:100px;
+  padding:20px 28px;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
 }
-.stat-l{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
+.hs-n{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.8rem;letter-spacing:1px;
+  color:var(--lime);line-height:1;
+}
+.hs-l{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px}
 
-/* ===== SECTION COMMONS ===== */
-section{padding:100px 6%}
-.sec-label{
-  display:inline-block;font-size:.72rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:10px;
+/* ─── SECTION BASE ─── */
+section{padding:100px 48px;border-bottom:1px solid var(--border)}
+
+.sec-header{
+  display:flex;align-items:baseline;gap:16px;
+  margin-bottom:72px;
+}
+.sec-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1rem;letter-spacing:3px;color:var(--muted);
 }
 .sec-title{
-  font-family:var(--font-h);font-size:clamp(2rem,5vw,3.6rem);
-  font-weight:800;letter-spacing:-2px;line-height:1.1;margin-bottom:14px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,6vw,5.5rem);
+  letter-spacing:1px;
+  line-height:.95;
+  color:var(--paper);
 }
-.sec-sub{color:var(--muted);font-size:.97rem;max-width:480px;margin-bottom:56px;font-weight:300;line-height:1.75}
+.sec-title em{
+  font-family:'Instrument Serif',serif;
+  font-style:italic;color:var(--lime);
+}
 
-/* ===== ABOUT ===== */
-#about{background:var(--bg2)}
-.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center;max-width:1100px}
-.about-vis{position:relative}
-.about-avatar{
-  width:100%;max-width:340px;aspect-ratio:3/4;
-  background:var(--surface);border-radius:24px;
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:7rem;position:relative;overflow:hidden;
+/* ─── ABOUT ─── */
+#about{background:#0d0d0d}
+.about-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
 }
-.about-avatar::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(79,142,247,.08),rgba(124,58,237,.12));
+.about-left{}
+.about-role-tag{
+  display:inline-block;
+  padding:4px 12px;
+  border:1px solid var(--lime);
+  color:var(--lime);
+  font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:28px;
 }
-.float-badge{
+.about-p{
+  font-size:.88rem;color:#9a9585;
+  line-height:2;margin-bottom:20px;
+}
+.about-p strong{color:var(--paper);font-weight:500}
+
+.about-right{}
+.about-info-grid{display:flex;flex-direction:column;gap:0}
+.info-row{
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+  font-size:.82rem;
+}
+.info-label{color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-size:.68rem}
+.info-val{color:var(--paper)}
+
+/* big rotated text */
+.about-rotated{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:7rem;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(232,255,71,.12);
+  transform:rotate(-90deg) translateX(-60%);
+  transform-origin:left top;
   position:absolute;
-  background:rgba(20,20,40,.9);border:1px solid var(--border);
-  border-radius:14px;padding:12px 18px;backdrop-filter:blur(20px);
-  animation:orb-float 5s ease-in-out infinite;
+  right:-120px;top:50%;
+  letter-spacing:8px;
+  pointer-events:none;
+  white-space:nowrap;
 }
-.fb-a{bottom:-16px;right:-16px;animation-delay:0s}
-.fb-b{top:36px;left:-24px;animation-delay:-2s}
-.fb-val{font-family:var(--font-h);font-size:1.35rem;font-weight:800;color:var(--accent)}
-.fb-lbl{font-size:.72rem;color:var(--muted)}
-.about-text h3{font-family:var(--font-h);font-size:1.65rem;font-weight:700;letter-spacing:-.5px;margin-bottom:18px}
-.about-text p{color:var(--muted);font-size:.96rem;line-height:1.9;margin-bottom:18px}
-.about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-.tag{
-  padding:5px 14px;background:rgba(79,142,247,.07);
-  border:1px solid rgba(79,142,247,.2);border-radius:50px;
-  font-size:.8rem;color:var(--accent);font-weight:500;
-  transition:background var(--ease);cursor:default;
-}
-.tag:hover{background:rgba(79,142,247,.15)}
 
-/* ===== SKILLS ===== */
-#skills{background:var(--bg)}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:1100px}
-.skill-card{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:var(--r);padding:28px;
-  position:relative;overflow:hidden;
-  transition:transform var(--ease),border-color var(--ease),box-shadow var(--ease);
+/* ─── SKILLS ─── */
+#skills{background:#111111;position:relative}
+.skills-layout{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:80px;
+  align-items:start;
 }
-.skill-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transform:scaleX(0);transform-origin:left;transition:transform var(--ease);
-}
-.skill-card:hover{transform:translateY(-4px);border-color:rgba(79,142,247,.3);box-shadow:0 20px 60px rgba(0,0,0,.35)}
-.skill-card:hover::before{transform:scaleX(1)}
-.sk-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:16px}
-.sk-title{font-family:var(--font-h);font-size:.98rem;font-weight:700;margin-bottom:18px;letter-spacing:-.3px}
-.pills{display:flex;flex-wrap:wrap;gap:8px}
-.pill{
-  padding:5px 12px;border-radius:50px;font-size:.77rem;font-weight:500;
-  border:1px solid var(--border);background:rgba(255,255,255,.025);color:var(--muted);
-  transition:all var(--ease);cursor:default;
-}
-.pill:hover{border-color:var(--accent);color:var(--text);background:rgba(79,142,247,.08)}
+.skills-sidebar{}
+.skills-sidebar p{font-size:.78rem;color:var(--muted);line-height:1.9}
 
-/* ===== PROJECTS ===== */
-#projects{background:var(--bg2)}
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:24px;max-width:1100px}
-.proj-card{
-  background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
-  padding:32px;display:flex;flex-direction:column;
-  position:relative;overflow:hidden;
-  transition:transform var(--ease),border-color var(--ease),box-shadow var(--ease);
+.skill-groups{display:flex;flex-direction:column;gap:48px}
+.sg-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:3px;
+  color:var(--lime);
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:20px;
 }
-.proj-card::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
-  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
+.skill-items{display:flex;flex-wrap:wrap;gap:10px}
+.sk{
+  padding:7px 16px;
+  border:1px solid var(--border);
+  font-size:.75rem;letter-spacing:1px;
+  color:#9a9585;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden;
 }
-.proj-card:hover{transform:translateY(-6px);border-color:rgba(79,142,247,.28);box-shadow:0 32px 80px rgba(0,0,0,.45)}
-.proj-card:hover::after{transform:scaleX(1)}
-.proj-num{font-family:var(--font-h);font-size:.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;opacity:.65}
-.proj-title{font-family:var(--font-h);font-size:1.22rem;font-weight:700;margin-bottom:12px;letter-spacing:-.4px;line-height:1.3}
-.proj-desc{color:var(--muted);font-size:.88rem;line-height:1.82;margin-bottom:22px;flex-grow:1}
-.proj-stack{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
-.sbadge{
-  padding:4px 10px;background:rgba(6,214,199,.07);
-  border:1px solid rgba(6,214,199,.18);border-radius:6px;
-  font-size:.74rem;color:var(--accent3);font-weight:500;
+.sk::before{
+  content:'';position:absolute;inset:0;
+  background:var(--lime);
+  transform:translateY(100%);
+  transition:transform .2s;
+  z-index:0;
 }
-.proj-links{display:flex;gap:10px}
-.proj-link{
+.sk span{position:relative;z-index:1;transition:color .2s}
+.sk:hover::before{transform:translateY(0)}
+.sk:hover span{color:var(--ink)}
+
+/* ─── PROJECTS ─── */
+#projects{background:#0d0d0d}
+.proj-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
+.proj-item{
+  display:grid;
+  grid-template-columns:64px 1fr auto;
+  gap:40px;
+  align-items:center;
+  padding:36px 0;
+  border-bottom:1px solid var(--border);
+  transition:background .2s;
+  position:relative;
+}
+.proj-item::before{
+  content:'';position:absolute;inset:0;
+  background:var(--dim);
+  opacity:0;transition:opacity .2s;
+  pointer-events:none;
+}
+.proj-item:hover::before{opacity:1}
+.proj-item>*{position:relative;z-index:1}
+
+.proj-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;color:var(--muted);letter-spacing:2px;
+  line-height:1;
+}
+.proj-body{}
+.proj-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.4rem,3vw,2.4rem);
+  letter-spacing:1px;
+  color:var(--paper);
+  margin-bottom:8px;
+  transition:color .2s;
+}
+.proj-item:hover .proj-name{color:var(--lime)}
+.proj-desc-short{font-size:.78rem;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:14px}
+.proj-tags{display:flex;gap:8px;flex-wrap:wrap}
+.ptag{
+  font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);padding:3px 8px;border:1px solid var(--border);
+}
+.proj-actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.proj-link-btn{
   display:inline-flex;align-items:center;gap:6px;
-  color:var(--muted);font-size:.83rem;font-weight:500;
-  border:1px solid var(--border);padding:7px 14px;border-radius:50px;
-  background:rgba(255,255,255,.02);
-  transition:all var(--ease);
+  font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);
+  border:1px solid var(--border);
+  padding:7px 14px;
+  transition:all .2s;
+  white-space:nowrap;
 }
-.proj-link:hover{color:var(--text);border-color:var(--accent);background:rgba(79,142,247,.08)}
+.proj-link-btn:hover{border-color:var(--lime);color:var(--lime)}
 
-/* ===== EXPERIENCE ===== */
-#experience{background:var(--bg)}
-.timeline{max-width:780px;position:relative;padding-left:36px}
-.timeline::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:1px;
-  background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);
+/* ─── EXPERIENCE ─── */
+#experience{background:#111111}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)}
+.exp-card{
+  background:#111111;
+  padding:48px 40px;
+  position:relative;
+  overflow:hidden;
 }
-.t-item{position:relative;margin-bottom:52px;padding-left:28px}
-.t-item::before{
-  content:'';position:absolute;left:-42px;top:7px;
-  width:13px;height:13px;background:var(--accent);border-radius:50%;
-  border:3px solid var(--bg);box-shadow:0 0 0 3px rgba(79,142,247,.3);
+.exp-card::after{
+  content:'';
+  position:absolute;top:0;left:0;width:3px;height:0;
+  background:var(--lime);
+  transition:height .4s ease;
 }
-.t-date{font-size:.76rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px}
-.t-company{font-family:var(--font-h);font-size:1.28rem;font-weight:700;margin-bottom:3px;letter-spacing:-.4px}
-.t-role{font-size:.88rem;color:var(--accent3);font-weight:500;margin-bottom:14px}
-.t-list{list-style:none;color:var(--muted);font-size:.91rem;line-height:1.82}
-.t-list li{position:relative;padding-left:18px;margin-bottom:8px}
-.t-list li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:.78rem;top:1px}
-
-/* ===== CERTIFICATIONS ===== */
-#certifications{background:var(--bg2)}
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:20px;max-width:1100px}
-.cert-card{
-  background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
-  padding:26px;display:flex;align-items:flex-start;gap:18px;
-  transition:transform var(--ease),border-color var(--ease);
+.exp-card:hover::after{height:100%}
+.exp-period{
+  font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--lime);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
 }
-.cert-card:hover{transform:translateY(-3px);border-color:rgba(79,142,247,.3)}
-.cert-ico{
-  width:50px;height:50px;flex-shrink:0;
-  background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.2);
-  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+.exp-period::after{content:'';flex:1;height:1px;background:var(--border)}
+.exp-co{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.2rem;letter-spacing:1px;
+  color:var(--paper);margin-bottom:4px;
 }
-.cert-body h4{font-family:var(--font-h);font-size:.93rem;font-weight:700;margin-bottom:4px;letter-spacing:-.2px;line-height:1.3}
-.cert-body p{font-size:.8rem;color:var(--muted);margin-bottom:8px}
-.cert-badge{
-  display:inline-block;padding:3px 10px;
-  background:rgba(34,211,163,.1);border:1px solid rgba(34,211,163,.3);
-  border-radius:50px;font-size:.7rem;color:var(--green);font-weight:700;
-  text-transform:uppercase;letter-spacing:.5px;
+.exp-role{
+  font-size:.75rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:24px;
+}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.exp-list li{
+  font-size:.8rem;color:#6a6555;line-height:1.75;
+  padding-left:20px;position:relative;
+}
+.exp-list li::before{
+  content:'→';position:absolute;left:0;
+  color:var(--lime);font-size:.72rem;
 }
 
-/* ===== CONTACT ===== */
-#contact{background:var(--bg);text-align:center}
-.contact-inner{max-width:700px;margin:0 auto}
-.contact-email-link{
-  font-family:var(--font-h);font-size:clamp(1.4rem,4vw,2.6rem);
-  font-weight:700;letter-spacing:-1px;color:var(--text);
-  display:block;margin:22px 0 38px;
-  transition:color var(--ease);
+/* ─── CERTS ─── */
+#certifications{background:#0d0d0d}
+.cert-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:var(--border);
+  border:1px solid var(--border);
 }
-.contact-email-link:hover{color:var(--accent)}
-.socials{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:56px}
-.soc-btn{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:11px 22px;border:1px solid var(--border);border-radius:50px;
-  color:var(--muted);font-size:.87rem;font-weight:500;
-  background:rgba(255,255,255,.02);
-  transition:all var(--ease);
+.cert-tile{
+  background:#0d0d0d;
+  padding:40px 32px;
+  transition:background .2s;
+  position:relative;
 }
-.soc-btn:hover{border-color:var(--accent);color:var(--text);background:rgba(79,142,247,.08);transform:translateY(-2px)}
-.soc-btn i{color:var(--accent);font-size:.95rem}
+.cert-tile:hover{background:#111111}
+.cert-tile::before{
+  content:attr(data-n);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:5rem;
+  color:rgba(232,255,71,.06);
+  position:absolute;top:16px;right:20px;
+  line-height:1;pointer-events:none;
+}
+.cert-issuer{
+  font-size:.62rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--lime);margin-bottom:16px;
+}
+.cert-name{
+  font-family:'Instrument Serif',serif;
+  font-style:italic;
+  font-size:1.25rem;
+  color:var(--paper);
+  line-height:1.4;margin-bottom:20px;
+}
+.cert-verified{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);
+}
+.cert-verified::before{content:'✓';color:var(--lime)}
 
-/* ===== FOOTER ===== */
+/* ─── CONTACT ─── */
+#contact{
+  background:#0d0d0d;
+  min-height:60vh;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  text-align:left;
+  position:relative;
+  overflow:hidden;
+}
+.contact-bg-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,18vw,18rem);
+  color:transparent;
+  -webkit-text-stroke:1px rgba(232,255,71,.05);
+  position:absolute;bottom:-20px;left:0;right:0;
+  letter-spacing:8px;white-space:nowrap;
+  pointer-events:none;line-height:1;
+  overflow:hidden;
+}
+.contact-inner{position:relative;z-index:1}
+.contact-label{
+  font-size:.72rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:20px;
+}
+.contact-email{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,7vw,7rem);
+  letter-spacing:1px;
+  line-height:.95;
+  color:var(--paper);
+  display:block;
+  margin-bottom:48px;
+  transition:color .2s;
+}
+.contact-email:hover{color:var(--lime)}
+.contact-links{display:flex;flex-wrap:wrap;gap:12px}
+.clink{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;
+  border:1px solid var(--border);
+  font-size:.72rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);
+  transition:all .2s;
+}
+.clink:hover{border-color:var(--lime);color:var(--lime)}
+.clink i{font-size:.8rem}
+
+/* ─── FOOTER ─── */
 footer{
-  background:var(--bg2);border-top:1px solid var(--border);
-  padding:26px 6%;display:flex;align-items:center;
-  justify-content:space-between;flex-wrap:wrap;gap:12px;
+  padding:24px 48px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
 }
-.ft-logo{font-family:var(--font-h);font-weight:800;font-size:1.05rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.ft-txt{font-size:.8rem;color:var(--muted)}
+.ft-brand{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:3px;color:var(--lime);
+}
+.ft-copy{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 
-/* ===== SCROLL REVEAL ===== */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.reveal.on{opacity:1;transform:none}
 
-/* ===== RESPONSIVE ===== */
+/* ─── MOBILE ─── */
 @media(max-width:900px){
-  .about-grid{grid-template-columns:1fr}
-  .about-vis{display:none}
-}
-@media(max-width:680px){
-  .nav-links{
-    display:none;flex-direction:column;
-    position:absolute;top:60px;left:0;right:0;
-    background:rgba(8,8,16,.97);border-bottom:1px solid var(--border);
-    padding:20px 6%;gap:22px;
-  }
-  .nav-links.open{display:flex}
-  .hamburger{display:flex}
-  .hero-stats{gap:24px}
-  footer{justify-content:center;text-align:center}
+  nav{padding:0 24px}
+  .nav-menu{display:none;flex-direction:column;position:fixed;top:56px;left:0;right:0;background:#0d0d0d;border-bottom:1px solid var(--border);padding:24px;gap:20px}
+  .nav-menu.open{display:flex}
+  .ham-btn{display:flex}
+  #hero,.about-layout,.skills-layout,.exp-grid,.cert-row{padding-left:24px;padding-right:24px}
+  section{padding:60px 24px}
+  .about-layout,.skills-layout,.exp-grid{grid-template-columns:1fr}
+  .cert-row{grid-template-columns:1fr}
+  .proj-item{grid-template-columns:40px 1fr;gap:20px}
+  .proj-actions{display:none}
+  footer{padding:20px 24px}
+  .contact-bg-text{display:none}
+  #hero{padding:90px 24px 48px}
 }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="nav-logo">A<span style="opacity:.35">.</span>Shaikh</div>
-  <ul class="nav-links" id="navLinks">
+<!-- cursor -->
+<div id="cur"></div>
+
+<!-- ══════ NAV ══════ -->
+<nav>
+  <div class="nav-wordmark">AZH∧R</div>
+  <ul class="nav-menu" id="navMenu">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#certifications">Certs</a></li>
-    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
   </ul>
-  <button class="hamburger" id="ham" aria-label="Menu">
+  <a href="#contact" class="nav-hire">Hire Me</a>
+  <button class="ham-btn" id="hamBtn" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- HERO -->
+<!-- ══════ HERO ══════ -->
 <section id="hero">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-  <div class="hero-inner">
-    <div class="hero-badge"><span class="badge-dot"></span>Available for opportunities</div>
-    <h1 class="hero-name">Mohd<br/><span class="grad">Azhar</span></h1>
-    <div class="hero-role"><span id="typed"></span><span class="cursor">|</span></div>
-    <p class="hero-desc">Innovative Software Engineer skilled in Python, Cloud &amp; Distributed Systems — building scalable, containerised solutions with a DevOps-first mindset.</p>
-    <div class="hero-btns">
-      <a href="#projects" class="btn-p"><i class="fas fa-rocket"></i>View Projects</a>
-      <a href="#contact"  class="btn-o"><i class="fas fa-envelope"></i>Contact Me</a>
-      <a href="https://drive.google.com/file/d/1Xp4kZKjMqY3lk8Qlp3nGsoi-k-Vb2RlY/view?usp=sharing" target="_blank" class="btn-o"><i class="fas fa-download"></i>Resume</a>
+  <div class="dot-grid"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-eyebrow">
+    <span></span>
+    Mohd Azhar Shaikh &nbsp;·&nbsp; Indore, India &nbsp;·&nbsp; 2026
+  </div>
+
+  <div class="hero-name-block">
+    <div class="hero-big">
+      DEVOPS<br/>
+      <span class="italic-serif">&amp; Cloud</span><br/>
+      <span class="lime">ENGINEER</span>
     </div>
-    <div class="hero-stats">
-      <div><div class="stat-n">3+</div><div class="stat-l">Projects</div></div>
-      <div><div class="stat-n">3x</div><div class="stat-l">Cisco Certs</div></div>
-      <div><div class="stat-n">7.51</div><div class="stat-l">CGPA</div></div>
-      <div><div class="stat-n">4th</div><div class="stat-l">Year B.Tech</div></div>
+    <!-- hand-drawn squiggle SVG -->
+    <svg class="squiggle" viewBox="0 0 420 14" preserveAspectRatio="none">
+      <path d="M2,7 C30,2 58,12 86,7 C114,2 142,12 170,7 C198,2 226,12 254,7 C282,2 310,12 338,7 C366,2 394,12 418,7"/>
+    </svg>
+
+    <div class="hero-sub">
+      <p class="hero-desc">
+        Fourth-year CS undergrad building scalable pipelines,<br/>
+        containerised microservices &amp; cloud-native systems.<br/>
+        <span style="color:#4a4535;margin-top:8px;display:block">// B.Tech CSE · Medi-caps University · CGPA 7.51</span>
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-solid"><i class="fas fa-arrow-right"></i>View Work</a>
+        <a href="https://drive.google.com/file/d/1Xp4kZKjMqY3lk8Qlp3nGsoi-k-Vb2RlY/view?usp=sharing" target="_blank" class="btn-ghost"><i class="fas fa-download"></i>Resume</a>
+        <a href="#contact" class="btn-ghost"><i class="fas fa-paper-plane"></i>Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hs">
+      <div class="hs-n">3+</div>
+      <div class="hs-l">Projects Shipped</div>
+    </div>
+    <div class="hs">
+      <div class="hs-n">3×</div>
+      <div class="hs-l">Cisco Certified</div>
+    </div>
+    <div class="hs">
+      <div class="hs-n">7.51</div>
+      <div class="hs-l">CGPA</div>
+    </div>
+    <div class="hs">
+      <div class="hs-n">'26</div>
+      <div class="hs-l">Graduating</div>
+    </div>
+    <div class="hs">
+      <div class="hs-n">∞</div>
+      <div class="hs-l">Coffee Consumed</div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ══════ ABOUT ══════ -->
 <section id="about">
-  <div class="about-grid">
-    <div class="about-vis reveal">
-      <div class="about-avatar">&#129489;&#8205;&#128187;</div>
-      <div class="float-badge fb-a"><div class="fb-val">DevOps</div><div class="fb-lbl">Specialist</div></div>
-      <div class="float-badge fb-b"><div class="fb-val">Cloud</div><div class="fb-lbl">AWS &middot; K8s</div></div>
+  <div class="sec-header reveal">
+    <span class="sec-num">01 /</span>
+    <h2 class="sec-title">About <em>me</em></h2>
+  </div>
+
+  <div class="about-layout">
+    <div class="about-left reveal">
+      <div class="about-role-tag">Software Engineer</div>
+      <p class="about-p">
+        I'm a <strong>fourth-year Computer Science student</strong> who lives in the space between writing code and shipping infrastructure. Not just a developer — someone who thinks in systems, pipelines, and containers.
+      </p>
+      <p class="about-p">
+        My day-to-day involves building <strong>self-healing CI/CD pipelines</strong>, designing <strong>microservices on Kubernetes</strong>, and making deployment look effortless. I care deeply about reliability, observability, and automation that actually works in production.
+      </p>
+      <p class="about-p">
+        When I'm not pushing to GitHub, I'm reading RFC documents, tinkering with Helm charts, or thinking about the next system I want to break (and fix) before anyone notices.
+      </p>
     </div>
-    <div class="about-text reveal">
-      <span class="sec-label">About Me</span>
-      <h2 class="sec-title">Engineer.<br/>Builder.<br/>Problem Solver.</h2>
-      <p>I'm a fourth-year Computer Science student at Medi-caps University passionate about building scalable, resilient systems. My work lives at the intersection of software engineering and cloud infrastructure.</p>
-      <p>From designing self-healing CI/CD pipelines to architecting microservices on Kubernetes, I love turning complex engineering challenges into elegant, automated solutions. Currently deepening expertise in cloud-native technologies and DevSecOps.</p>
-      <div class="about-tags">
-        <span class="tag">Python</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
-        <span class="tag">Jenkins</span><span class="tag">AWS</span><span class="tag">CI/CD</span>
-        <span class="tag">React.js</span><span class="tag">Node.js</span>
+
+    <div class="about-right reveal">
+      <div class="about-info-grid">
+        <div class="info-row">
+          <span class="info-label">Location</span>
+          <span class="info-val">Indore, India</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">University</span>
+          <span class="info-val">Medi-caps University</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Degree</span>
+          <span class="info-val">B.Tech CSE · 4th Year</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">CGPA</span>
+          <span class="info-val">7.51</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Status</span>
+          <span class="info-val" style="color:#e8ff47">→ Open to Work</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Speciality</span>
+          <span class="info-val">DevOps · Cloud · Backend</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Email</span>
+          <span class="info-val">azharconnects8@gmail.com</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">GitHub</span>
+          <span class="info-val">azharshaikh7898</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
+<!-- ══════ SKILLS ══════ -->
 <section id="skills">
-  <span class="sec-label">What I Know</span>
-  <h2 class="sec-title">Skills &amp; Stack</h2>
-  <p class="sec-sub">A curated toolkit built through projects, internships, and certifications.</p>
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <div class="sk-icon" style="background:rgba(79,142,247,.12)">&#9729;&#65039;</div>
-      <div class="sk-title">Cloud &amp; DevOps</div>
-      <div class="pills">
-        <span class="pill">AWS</span><span class="pill">Docker</span><span class="pill">Kubernetes</span>
-        <span class="pill">Jenkins</span><span class="pill">Helm</span><span class="pill">CI/CD</span>
-        <span class="pill">Agile</span><span class="pill">SDLC</span>
-      </div>
+  <div class="sec-header reveal">
+    <span class="sec-num">02 /</span>
+    <h2 class="sec-title">Skills <em>&amp; Stack</em></h2>
+  </div>
+
+  <div class="skills-layout">
+    <div class="skills-sidebar reveal">
+      <p>Tools and technologies I use to design, build, and ship production-grade systems. Accumulated through real projects — not tutorials.</p>
     </div>
-    <div class="skill-card reveal">
-      <div class="sk-icon" style="background:rgba(124,58,237,.12)">&#9889;</div>
-      <div class="sk-title">Programming</div>
-      <div class="pills">
-        <span class="pill">Python</span><span class="pill">JavaScript</span>
-        <span class="pill">Node.js</span><span class="pill">Bash</span>
-        <span class="pill">HTML</span><span class="pill">CSS</span>
+
+    <div class="skill-groups reveal">
+      <div>
+        <div class="sg-title">Cloud &amp; DevOps</div>
+        <div class="skill-items">
+          <div class="sk"><span>AWS</span></div>
+          <div class="sk"><span>Docker</span></div>
+          <div class="sk"><span>Kubernetes</span></div>
+          <div class="sk"><span>Jenkins</span></div>
+          <div class="sk"><span>Helm</span></div>
+          <div class="sk"><span>CI / CD</span></div>
+          <div class="sk"><span>DevSecOps</span></div>
+          <div class="sk"><span>Agile</span></div>
+        </div>
       </div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="sk-icon" style="background:rgba(6,214,199,.12)">&#127760;</div>
-      <div class="sk-title">Web &amp; Frameworks</div>
-      <div class="pills">
-        <span class="pill">React.js</span><span class="pill">Express.js</span>
-        <span class="pill">REST APIs</span><span class="pill">MongoDB</span>
-        <span class="pill">MySQL</span><span class="pill">SQL</span>
+      <div>
+        <div class="sg-title">Programming</div>
+        <div class="skill-items">
+          <div class="sk"><span>Python</span></div>
+          <div class="sk"><span>JavaScript</span></div>
+          <div class="sk"><span>Node.js</span></div>
+          <div class="sk"><span>Bash</span></div>
+          <div class="sk"><span>HTML</span></div>
+          <div class="sk"><span>CSS</span></div>
+        </div>
       </div>
-    </div>
-    <div class="skill-card reveal">
-      <div class="sk-icon" style="background:rgba(34,211,163,.12)">&#128295;</div>
-      <div class="sk-title">Tools &amp; Systems</div>
-      <div class="pills">
-        <span class="pill">Git</span><span class="pill">GitHub</span>
-        <span class="pill">Linux</span><span class="pill">OOP</span>
-        <span class="pill">DSA</span><span class="pill">Networking</span>
+      <div>
+        <div class="sg-title">Web &amp; Databases</div>
+        <div class="skill-items">
+          <div class="sk"><span>React.js</span></div>
+          <div class="sk"><span>Express.js</span></div>
+          <div class="sk"><span>MongoDB</span></div>
+          <div class="sk"><span>MySQL</span></div>
+          <div class="sk"><span>REST APIs</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="sg-title">Tools &amp; Systems</div>
+        <div class="skill-items">
+          <div class="sk"><span>Git</span></div>
+          <div class="sk"><span>GitHub</span></div>
+          <div class="sk"><span>Linux</span></div>
+          <div class="sk"><span>OOP</span></div>
+          <div class="sk"><span>DSA</span></div>
+          <div class="sk"><span>Networking</span></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- ══════ PROJECTS ══════ -->
 <section id="projects">
-  <span class="sec-label">What I've Built</span>
-  <h2 class="sec-title">Projects</h2>
-  <p class="sec-sub">Real-world applications built with production-grade technologies.</p>
-  <div class="proj-grid">
+  <div class="sec-header reveal">
+    <span class="sec-num">03 /</span>
+    <h2 class="sec-title">Selected <em>Work</em></h2>
+  </div>
 
-    <div class="proj-card reveal">
-      <div class="proj-num">Project / 01</div>
-      <h3 class="proj-title">Media Processing Microservice</h3>
-      <p class="proj-desc">Python-based microservices for video-to-audio processing using OOP principles. Scalable containerised deployment on Docker &amp; Kubernetes with full service monitoring, health checks, and reliable inter-service communication.</p>
-      <div class="proj-stack">
-        <span class="sbadge">Python</span><span class="sbadge">Docker</span>
-        <span class="sbadge">Kubernetes</span><span class="sbadge">Jenkins</span>
-        <span class="sbadge">Helm</span><span class="sbadge">AWS</span>
+  <div class="proj-list">
+
+    <div class="proj-item reveal">
+      <div class="proj-num">01</div>
+      <div class="proj-body">
+        <div class="proj-name">Media Processing Microservice</div>
+        <p class="proj-desc-short">Python microservices for video-to-audio conversion — containerised on Kubernetes with health checks, service monitoring, and Jenkins-driven CI deployment on AWS.</p>
+        <div class="proj-tags">
+          <span class="ptag">Python</span>
+          <span class="ptag">Docker</span>
+          <span class="ptag">Kubernetes</span>
+          <span class="ptag">Jenkins</span>
+          <span class="ptag">Helm</span>
+          <span class="ptag">AWS</span>
+        </div>
       </div>
-      <div class="proj-links">
-        <a href="https://github.com/azharshaikh7898/video-to-audio" target="_blank" class="proj-link">
+      <div class="proj-actions">
+        <a href="https://github.com/azharshaikh7898/video-to-audio" target="_blank" class="proj-link-btn">
           <i class="fab fa-github"></i> GitHub
         </a>
       </div>
     </div>
 
-    <div class="proj-card reveal">
-      <div class="proj-num">Project / 02</div>
-      <h3 class="proj-title">Streaming App with DevSecOps Pipeline</h3>
-      <p class="proj-desc">Full-stack Netflix-style streaming app built with React.js and Node.js using modular practices. Integrates MongoDB for data persistence with a security-first DevSecOps CI/CD pipeline for automated testing and deployment.</p>
-      <div class="proj-stack">
-        <span class="sbadge">React</span><span class="sbadge">Node.js</span>
-        <span class="sbadge">MongoDB</span><span class="sbadge">DevSecOps</span>
-        <span class="sbadge">Cloud-Native</span>
+    <div class="proj-item reveal">
+      <div class="proj-num">02</div>
+      <div class="proj-body">
+        <div class="proj-name">Streaming App + DevSecOps Pipeline</div>
+        <p class="proj-desc-short">Netflix-style full-stack streaming platform in React + Node.js with MongoDB, wrapped in a DevSecOps pipeline — security scanning, automated testing, and cloud-native deployment baked in.</p>
+        <div class="proj-tags">
+          <span class="ptag">React</span>
+          <span class="ptag">Node.js</span>
+          <span class="ptag">MongoDB</span>
+          <span class="ptag">DevSecOps</span>
+          <span class="ptag">Cloud-Native</span>
+        </div>
       </div>
-      <div class="proj-links">
-        <a href="https://github.com/azharshaikh7898/netflix-clone-" target="_blank" class="proj-link">
+      <div class="proj-actions">
+        <a href="https://github.com/azharshaikh7898/netflix-clone-" target="_blank" class="proj-link-btn">
           <i class="fab fa-github"></i> GitHub
         </a>
       </div>
     </div>
 
-    <div class="proj-card reveal">
-      <div class="proj-num">Project / 03</div>
-      <h3 class="proj-title">Self-Healing CI/CD Pipeline</h3>
-      <p class="proj-desc">Automated CI/CD pipeline with canary deployment strategy and auto-rollback. Features Bash and Node.js automation scripts for deployment monitoring, drastically improving release reliability and minimising downtime.</p>
-      <div class="proj-stack">
-        <span class="sbadge">Jenkins</span><span class="sbadge">Docker</span>
-        <span class="sbadge">Node.js</span><span class="sbadge">Bash</span>
-        <span class="sbadge">Linux</span>
+    <div class="proj-item reveal">
+      <div class="proj-num">03</div>
+      <div class="proj-body">
+        <div class="proj-name">Self-Healing CI/CD + Canary Deployment</div>
+        <p class="proj-desc-short">A CI/CD pipeline that heals itself — canary deployments with automated rollback on failure. Bash + Node.js scripts monitor release health in real-time on Linux + Jenkins + Docker.</p>
+        <div class="proj-tags">
+          <span class="ptag">Jenkins</span>
+          <span class="ptag">Docker</span>
+          <span class="ptag">Node.js</span>
+          <span class="ptag">Bash</span>
+          <span class="ptag">Linux</span>
+        </div>
       </div>
-      <div class="proj-links">
-        <a href="https://github.com/azharshaikh7898/Canary" target="_blank" class="proj-link">
+      <div class="proj-actions">
+        <a href="https://github.com/azharshaikh7898/Canary" target="_blank" class="proj-link-btn">
           <i class="fab fa-github"></i> GitHub
         </a>
       </div>
@@ -519,135 +821,132 @@ footer{
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- ══════ EXPERIENCE ══════ -->
 <section id="experience">
-  <span class="sec-label">Work History</span>
-  <h2 class="sec-title">Experience</h2>
-  <p class="sec-sub">Hands-on industry exposure in DevOps and cloud infrastructure.</p>
-  <div class="timeline">
+  <div class="sec-header reveal">
+    <span class="sec-num">04 /</span>
+    <h2 class="sec-title">Experience</h2>
+  </div>
 
-    <div class="t-item reveal">
-      <div class="t-date">Feb 2026 &mdash; Mar 2026</div>
-      <div class="t-company">Future Invo Solutions</div>
-      <div class="t-role">DevOps &amp; Cloud Intern</div>
-      <ul class="t-list">
-        <li>Gained hands-on experience with cloud infrastructure setup and DevOps tooling in a production environment.</li>
-        <li>Assisted in building and maintaining CI/CD pipelines using Jenkins and Docker for automated deployments.</li>
-        <li>Worked with cloud platforms to deploy and manage containerised workloads using Kubernetes.</li>
-        <li>Collaborated with the engineering team on infrastructure automation and monitoring solutions.</li>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <div class="exp-period">Feb 2026 — Mar 2026</div>
+      <div class="exp-co">Future Invo Solutions</div>
+      <div class="exp-role">DevOps &amp; Cloud Intern</div>
+      <ul class="exp-list">
+        <li>Set up and maintained cloud infrastructure and DevOps tooling in a live production environment.</li>
+        <li>Built and managed CI/CD pipelines using Jenkins and Docker for automated deployments.</li>
+        <li>Deployed and managed containerised workloads using Kubernetes on cloud platforms.</li>
+        <li>Worked on infrastructure automation and monitoring with the engineering team.</li>
       </ul>
     </div>
 
-    <div class="t-item reveal">
-      <div class="t-date">Jun 2025 &mdash; Jul 2025</div>
-      <div class="t-company">Medicaps University</div>
-      <div class="t-role">Computer Networking Academy Trainee</div>
-      <ul class="t-list">
+    <div class="exp-card reveal">
+      <div class="exp-period">Jun 2025 — Jul 2025</div>
+      <div class="exp-co">Medicaps University</div>
+      <div class="exp-role">CCNA Academy Trainee</div>
+      <ul class="exp-list">
         <li>Completed Cisco-certified CCNA training covering networking principles and protocols.</li>
-        <li>Practical labs on routing, switching, wireless configuration, and network troubleshooting.</li>
-        <li>Strengthened knowledge in cybersecurity fundamentals and Python-based network automation.</li>
+        <li>Hands-on labs on routing, switching, wireless configuration, and troubleshooting.</li>
+        <li>Deepened knowledge in cybersecurity fundamentals and Python network automation.</li>
       </ul>
     </div>
-
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
+<!-- ══════ CERTIFICATIONS ══════ -->
 <section id="certifications">
-  <span class="sec-label">Credentials</span>
-  <h2 class="sec-title">Certifications</h2>
-  <p class="sec-sub">Industry-recognised certifications validating my technical expertise.</p>
-  <div class="certs-grid">
+  <div class="sec-header reveal">
+    <span class="sec-num">05 /</span>
+    <h2 class="sec-title">Certifi<em>cations</em></h2>
+  </div>
 
-    <div class="cert-card reveal">
-      <div class="cert-ico">&#127942;</div>
-      <div class="cert-body">
-        <h4>CCNA: Introduction to Networks</h4>
-        <p>Cisco Systems</p>
-        <span class="cert-badge">Verified</span>
-      </div>
+  <div class="cert-row">
+    <div class="cert-tile reveal" data-n="01">
+      <div class="cert-issuer">Cisco Systems</div>
+      <div class="cert-name">CCNA: Introduction to Networks</div>
+      <div class="cert-verified">Verified</div>
     </div>
-
-    <div class="cert-card reveal">
-      <div class="cert-ico">&#127942;</div>
-      <div class="cert-body">
-        <h4>Switching, Routing &amp; Wireless Essentials</h4>
-        <p>Cisco Systems</p>
-        <span class="cert-badge">Verified</span>
-      </div>
+    <div class="cert-tile reveal" data-n="02">
+      <div class="cert-issuer">Cisco Systems</div>
+      <div class="cert-name">Switching, Routing &amp; Wireless Essentials</div>
+      <div class="cert-verified">Verified</div>
     </div>
-
-    <div class="cert-card reveal">
-      <div class="cert-ico">&#127942;</div>
-      <div class="cert-body">
-        <h4>Enterprise Networking, Security &amp; Automation</h4>
-        <p>Cisco Systems</p>
-        <span class="cert-badge">Verified</span>
-      </div>
+    <div class="cert-tile reveal" data-n="03">
+      <div class="cert-issuer">Cisco Systems</div>
+      <div class="cert-name">Enterprise Networking, Security &amp; Automation</div>
+      <div class="cert-verified">Verified</div>
     </div>
-
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ══════ CONTACT ══════ -->
 <section id="contact">
+  <div class="contact-bg-text">LET'S TALK</div>
   <div class="contact-inner reveal">
-    <span class="sec-label">Get In Touch</span>
-    <h2 class="sec-title">Let's Build<br/>Something Together</h2>
-    <p style="color:var(--muted);margin:14px auto 0;max-width:440px;font-weight:300;font-size:.97rem">
-      Open to internships, full-time roles, and interesting projects in DevOps, Cloud, or full-stack engineering.
-    </p>
-    <a href="mailto:azharconnects8@gmail.com" class="contact-email-link">azharconnects8@gmail.com</a>
-    <div class="socials">
-      <a href="https://linkedin.com/in/azhar-shaikh-a2120924a/" target="_blank" class="soc-btn"><i class="fab fa-linkedin"></i>LinkedIn</a>
-      <a href="https://github.com/azharshaikh7898" target="_blank" class="soc-btn"><i class="fab fa-github"></i>GitHub</a>
-      <a href="mailto:azharconnects8@gmail.com" class="soc-btn"><i class="fas fa-envelope"></i>Email</a>
-      <a href="https://drive.google.com/file/d/11KQ0guZnKDT9gZHEQ1AaEtyQRP8KBLUM/view" target="_blank" class="soc-btn"><i class="fas fa-file-pdf"></i>Resume</a>
+    <div class="contact-label">// 06 — Get in touch</div>
+    <a href="mailto:azharconnects8@gmail.com" class="contact-email">
+      azharconnects8<br/>@gmail.com
+    </a>
+    <div class="contact-links">
+      <a href="https://linkedin.com/in/azhar-shaikh-a2120924a/" target="_blank" class="clink">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://github.com/azharshaikh7898" target="_blank" class="clink">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="tel:+917898555765" class="clink">
+        <i class="fas fa-phone"></i> +91 7898 555 765
+      </a>
+      <a href="https://drive.google.com/file/d/1Xp4kZKjMqY3lk8Qlp3nGsoi-k-Vb2RlY/view?usp=sharing" target="_blank" class="clink">
+        <i class="fas fa-file"></i> Download Resume
+      </a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════ FOOTER ══════ -->
 <footer>
-  <div class="ft-logo">Mohd Azhar Shaikh</div>
-  <p class="ft-txt">&copy; 2026 &middot; Crafted with precision and coffee &#9749;</p>
-  <p class="ft-txt">B.Tech CSE &middot; Medi-caps University</p>
+  <div class="ft-brand">AZH∧R · 2026</div>
+  <p class="ft-copy">B.Tech CSE · Medi-caps University · Indore</p>
+  <p class="ft-copy">Designed &amp; coded by hand — no templates</p>
 </footer>
 
 <script>
-/* Typing */
-const roles=["Software Engineer","DevOps Engineer","Cloud Enthusiast","Full-Stack Developer","Problem Solver"];
-let ri=0,ci=0,del=false;
-const tel=document.getElementById('typed');
-function type(){
-  const w=roles[ri];
-  if(!del){tel.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(type,1700);return}}
-  else{tel.textContent=w.slice(0,--ci);if(ci===0){del=false;ri=(ri+1)%roles.length}}
-  setTimeout(type,del?52:98);
-}
-type();
-
-/* Hamburger */
-const ham=document.getElementById('ham'),nl=document.getElementById('navLinks');
-ham.addEventListener('click',()=>nl.classList.toggle('open'));
-nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
-
-/* Navbar scroll */
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
+/* Custom cursor */
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.sk,.proj-item,.cert-tile').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('big'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
 });
 
-/* Scroll reveal — show immediately if in viewport, otherwise observe */
-const revEls=document.querySelectorAll('.reveal');
-function checkReveal(){
-  revEls.forEach(el=>{
-    const r=el.getBoundingClientRect();
-    if(r.top<window.innerHeight-40) el.classList.add('visible');
+/* Hamburger */
+const hamBtn = document.getElementById('hamBtn');
+const navMenu = document.getElementById('navMenu');
+hamBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('open')));
+
+/* Navbar scroll */
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.borderBottomColor =
+    window.scrollY > 40 ? 'rgba(232,255,71,.15)' : 'var(--border)';
+}, {passive:true});
+
+/* Scroll reveal */
+const revEls = document.querySelectorAll('.reveal');
+function checkReveal() {
+  revEls.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 30)
+      el.classList.add('on');
   });
 }
-checkReveal(); // run on load
-window.addEventListener('scroll',checkReveal,{passive:true});
-window.addEventListener('resize',checkReveal,{passive:true});
+checkReveal();
+window.addEventListener('scroll', checkReveal, {passive:true});
+window.addEventListener('resize', checkReveal, {passive:true});
 </script>
 </body>
 </html>
